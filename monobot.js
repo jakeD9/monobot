@@ -1,7 +1,18 @@
 require('dotenv').config()
+
+const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
+
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -14,44 +25,12 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
 
-    if (!message.content.startsWith(prefix) || message.author.bot) {
-        return
-    } else if (command === 'args-info') {
-        if (!args.length) {
-            return message.channel.send('next time give a command idiot');
-        }
-        message.channel.send(`Command name: ${command}\nArguments: ${args}`);
-
-        // mock command
-        // string -> sTrInG
-    } else if (command === 'mock') {
-        let oldString = args.join(' ');
-        let split = oldString.split('');
-
-        for (let i = 0; i < split.length; i += 2) {
-            split[i] = split[i].toLowerCase();
-        }
-        for (let i = 1; i < split.length; i += 2) {
-            split[i] = split[i].toUpperCase();
-        }
-        let newString = split.join('');
-
-        message.channel.send(newString);
-
-        // penchenski command
-        // string -> sTRING
-    } else if (command === 'penchenski') {
-        let oldString = args.join(' ');
-        let split = oldString.toLowerCase().split(' ');
-
-        for (let i = 0; i < split.length; i++) {
-            split[i] = split[i].charAt(0).toLowerCase() + split[i].substring(1).toUpperCase();
-        }
-
-        let newString = split.join(' ');
-        message.channel.send(newString);
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+   
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (err) {
+        console.log(err);
+        message.reply("No command found.");
     }
-
-
-
 });
