@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/serverlogger");
 // api routes
 app.get("/logs", (req, res) => {
     console.log("Parsing database...")
+    // ------------NEED TO UPDATE .FIND TO ONLY PULL FROM LAST DATE----------
     db.Log
         .find(req.query)
         .sort({ date: -1 })
@@ -36,7 +37,7 @@ app.post("/logs", (req, res) => {
     console.log("New log request, adding to database...")
     db.Log 
         .create(req.body)
-        .then((dbModel) => {
+        .then((data) => {
             console.log("Data added!");
             res.json(data);
         })
