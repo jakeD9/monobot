@@ -26,22 +26,51 @@ module.exports = {
                                 timestamp: timestamped
                             }
                             console.log(log)
-                            axios.post("/logs", log)
+                            axios.post("http://localhost:8080/logs", log)
                                 .then((response) => {
-                                    res.json(response);
                                     console.log(response);
                                 })
                                 .catch((err) => {
                                     throw err
                                 })
                         })
+                        .catch((err) => {
+                            throw err
+                        })
                 }
             }
         // look up by discord ID
         } else {
-            
+            let taggedUser = message.guild.members.get(args[0])
+            if (taggedUser) {
+                const member = message.guild.member(taggedUser)
+                if (member) {
+                    member
+                        .kick(reasoned)
+                        .then((response) => {
+                            let log = {
+                                moderator: authored,
+                                action: actioned,
+                                user: kicked,
+                                reason: reasoned,
+                                timestamp: timestamped
+                            }
+                            console.log(log)
+                            axios.post("http://localhost:8080/logs", log)
+                                .then(() => {
+                                    console.log(response);
+                                })
+                                .catch((err) => {
+                                    throw err
+                                })
+                        })
+                        .catch((err) => {
+                            throw err
+                        })
+                }
+            }
         }
 
-        message.channel.send(kicked + " kicked for reason " + reasoned);
+        message.channel.send(kicked + " kicked for reason " + reasoned) + " :ok_hand:";
     }
 };

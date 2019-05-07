@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const db = require("./models");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // setting up the server
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +20,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/serverlogger");
 // api routes
 app.get("/logs", (req, res) => {
     console.log("Parsing database...")
-    // ------------NEED TO UPDATE .FIND TO ONLY PULL FROM LAST DATE----------
     db.Log
         .find(req.query)
         .sort({ date: -1 })
@@ -34,6 +33,7 @@ app.get("/logs", (req, res) => {
 })
 
 app.post("/logs", (req, res) => {
+    console.log(req.body);
     console.log("New log request, adding to database...")
     db.Log 
         .create(req.body)
@@ -45,8 +45,6 @@ app.post("/logs", (req, res) => {
             throw err
         });
 })
-
-
 
 
 // server start
