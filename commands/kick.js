@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { API_URL } = require('../config.json')
 
 module.exports = {
     name: 'kick',
@@ -26,7 +27,7 @@ module.exports = {
                                 timestamp: timestamped
                             }
                             console.log(log)
-                            axios.post("http://localhost:8080/logs", log)
+                            axios.post(API_URL, log)
                                 .then((response) => {
                                     console.log(response);
                                 })
@@ -39,7 +40,7 @@ module.exports = {
                         })
                 }
             }
-        // look up by discord ID
+            // look up by discord ID
         } else {
             let taggedUser = message.guild.members.get(args[0])
             if (taggedUser) {
@@ -56,7 +57,7 @@ module.exports = {
                                 timestamp: timestamped
                             }
                             console.log(log)
-                            axios.post("http://localhost:8080/logs", log)
+                            axios.post(API_URL, log)
                                 .then(() => {
                                     console.log(response);
                                 })

@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { API_URL } = require('../config.json')
+
 
 module.exports = {
     name: 'ban',
@@ -27,7 +29,7 @@ module.exports = {
                                 timestamp: timestamped
                             }
                             console.log(log)
-                            axios.post("http://localhost:8080/logs", log)
+                            axios.post(API_URL, log)
                                 .then(() => {
                                     console.log(response);
                                 })
@@ -57,7 +59,7 @@ module.exports = {
                                 timestamp: timestamped
                             }
                             console.log(log)
-                            axios.post("http://localhost:8080/logs", log)
+                            axios.post(API_URL, log)
                                 .then((response) => {
                                     console.log(response);
                                 })

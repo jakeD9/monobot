@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token, botRole } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -25,12 +25,12 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || !message.member.roles.find(role => role.name === botRole)) return;
    
     try {
         client.commands.get(command).execute(message, args);
     } catch (err) {
         console.log(err);
-        message.reply("No command found.");
+        message.reply('No command found.');
     }
 });

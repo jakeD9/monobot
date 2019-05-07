@@ -1,5 +1,7 @@
 const axios = require('axios');
 const ms = require('ms');
+const { API_URL } = require('../config.json')
+
 
 module.exports = {
     name: 'mute',
@@ -18,7 +20,7 @@ module.exports = {
             if (taggedUser) {
                 const member = message.guild.member(taggedUser)
                 // check if the user can manage messages for channels, if yes we can't mute them
-                if (member.hasPermissions("MANAGE_MESSAGES")) return message.reply("Can't mute, member has Manage Messages permissions.");
+                if (member.hasPermissions('MANAGE_MESSAGES')) return message.reply("Can't mute, member has Manage Messages permissions.");
                 // look for a 'muted' role in the server already
                 let muteRole = message.guild.roles.find('name', 'muted');
                 // if we don't find it, we make one
@@ -54,7 +56,7 @@ module.exports = {
                             timestamp: timestamped
                         }
                         console.log(log)
-                        axios.post('http://localhost:8080/logs', log)
+                        axios.post(API_URL, log)
                             .then((response) => {
                                 console.log(response)
                             })
@@ -115,7 +117,7 @@ module.exports = {
                             timestamp: timestamped
                         }
                         console.log(log)
-                        axios.post('http://localhost:8080/logs', log)
+                        axios.post(API_URL, log)
                             .then((response) => {
                                 console.log(response)
                             })
