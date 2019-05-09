@@ -68,10 +68,15 @@ If you're making edits to the code and want to add things you might want to be m
 ### Made With
 
 [Discord.js](https://www.npmjs.com/package/discord.js) - For interacting with the Discord API.
+
 [Axios](https://www.npmjs.com/package/axios) - For promise based http/xml requests to and from the server.
+
 [Dotenv](https://www.npmjs.com/package/dotenv) - For storing config in a separate environemnt from our code.
+
 [Express](https://www.npmjs.com/package/express) - For setting up our server in a NodeJS environment.
+
 [Mongoose](https://www.npmjs.com/package/mongoose) - For interacting with our MongoDB database.
+
 [ms](https://www.npmjs.com/package/ms) - Converts time formates to milliseconds.
 
 ### Running the Bot
