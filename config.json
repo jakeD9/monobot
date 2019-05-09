@@ -1,0 +1,6 @@
+{
+    "prefix": "YOUR PREFERRED PREFIX HERE",
+    "token": "YOUR AUTH TOKEN HERE",
+    "API_URL": "YOUR API/SERVER URL HERE",
+    "botRole": "YOUR MODERATOR/ADMIN ROLES HERE"
+}

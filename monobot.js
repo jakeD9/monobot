@@ -18,7 +18,7 @@ client.once('ready', () => {
     console.log('Ready!');
 });
 
-client.login(process.env.AUTH_TOKEN);
+client.login(token);
 
 client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
