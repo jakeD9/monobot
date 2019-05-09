@@ -104,15 +104,20 @@ To run it, hit the "Run" button. It looks like a "Play" button on a media app, a
 
 Currently the bot accepts 3 moderator related commands. Each command accepts either a Discord user ID or a tagged user. Keep in mind your prefix may vary depending on the settings you enter in the config file - 
 
-Kick - Kicks a user from the server
+Kick - Kicks a user from the server,
 ex)
+
 !kick user reason
 
-Ban - Bans a user from the server indefinitely
+Ban - Bans a user from the server indefinitely,
+ex)
+
 !ban user reason
 * Bans must be manually removed - might add an unban command later on.
 
-Mute - Mutes a user for a specified time
+Mute - Mutes a user for a specified time,
+ex) 
+
 !mute user duration reason
 * Duration is referenced using certain notation:
     * 10s - 10 seconds
